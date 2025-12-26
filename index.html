@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Builder</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div id="InsertOptions">
+        <div id="logo">
+            <img src="./assets/logo.png" alt="logo" id="logoImage">
+        </div>
+
+        <div id="Options">
+            <div id="navButton">
+                <h5>Navigation Options</h5>
+                <div id="addNavLink">
+                    <input type="text" name="newButtonTitle" id="newButtonTitle" placeholder="Enter Link Title Here">
+                    <input type="url" name="newButtonLink" id="newButtonLink" placeholder="Enter Link">
+                    <button id="addButton" onclick="addnavButton()">
+                        + Add Link
+                    </button>
+                </div>
+                <button id="delButton" onclick="deleteNavButton()">
+                    - Delete Link
+                </button>
+            </div>
+            <div id="bannerOptions">
+                <h5>Banner Options</h5>
+                <div id="bannerImageInput">
+                    <input type="url" name="bannerImageURL" id="bannerImageURL" placeholder="Enter Image URL Here">
+                    <button id="addBannerButton" onclick="addBannerImage()">
+                        + Add Image
+                    </button>
+                </div>
+                <button id="delBannerButton" onclick="removeBannerImage()">
+                    - Delete Image
+                </button>
+            </div>
+
+            <div id="profileImageOptions">
+                <h5>Profile Image Options</h5>
+                <div id="profileImageInput">
+                    <input type="url" name="profileImageURL" id="profileImageURL" placeholder="Enter Image URL Here">
+                    <button id="addProfileImageButton" onclick="addProfileImage()">
+                        + Add Image
+                    </button>
+                </div>
+                <button id="delProfileImageButton" onclick="removeProfileImage()">
+                    - Delete Image
+                </button>
+            </div>
+
+            <div id="titleTaglineOptions">
+                <h5>Title & Tagline</h5>
+                <div>
+                    <input type="text" name="Title" id="titleInput" placeholder="Enter Title Here">
+                    <button id="addTitleButton" onclick="setTitle()">
+                        Update Title
+                    </button>
+                </div>
+                <div>
+                    <input type="text" name="tagline" id="taglineInput" placeholder="Enter Talgline">
+                    <button id="addTaglineButton" onclick="setTagline()">
+                        Update Tagline
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <button disabled>EXPORT</button>
+        </div>
+    </div>
+
+
+    <div id="displayPane">
+
+        <style>
+            #displayPane {
+                flex: 2;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /* background-image: url("https://imgs.search.brave.com/xdmHywn11TrJlXGjrO22cnl0UYm3Qsvefe95zZgsygc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZWFydGh0cmVra2Vy/cy5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTYvMDIvRXZl/cmVzdC1CYXNlLUNh/bXAuanBnLndlYnA"); */
+                background-size: cover;
+                background-position: center;
+
+                #contentArea {
+                    /* background: linear-gradient(135deg, #0066ff 0%, #8fbaff 50%, #ffffff 100%); */
+                    /* backdrop-filter: blur(10px); */
+                    width: 40%;
+                    height: 90%;
+                    /* border: 2px dashed #ccc; */
+                    border-radius: 15px;
+                    display: flex;
+                    align-items: start;
+                    font-size: 1.5em;
+                    /* color: #888; */
+                    flex-direction: column;
+                    padding: 10px;
+                }
+
+                #bannerImage {
+                    width: 100%;
+                    height: 30%;
+                    background-color: #e0e0e0;
+                    border-radius: 10px;
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.2em;
+                    color: #555;
+                    margin-bottom: 20%;
+                    /* border: 2px dashed #ccc; */
+
+                    #bannerImageSpace {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        object-fit: cover;
+                    }
+
+                    #profileImage {
+                        width: 150px;
+                        height: 150px;
+                        background-color: #c0c0c0;
+                        border-radius: 50%;
+                        position: absolute;
+                        bottom: -30%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1em;
+                        color: #555;
+
+                        #profileImageSpace {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+
+                }
+
+                #titleArea {
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    flex-direction: column;
+
+                    #tagline {
+                        font-size: 0.8em;
+                        color: #777;
+                        margin-bottom: 10px;
+                    }
+
+                }
+
+                #navLinks {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 20px;
+
+
+                }
+
+            }
+
+            .navLink {
+                width: 70%;
+                height: auto;
+                padding: 20px;
+                padding: 10px 15px;
+                background-color: #f5f5f5;
+                border-radius: 10px;
+                text-align: center;
+                flex: 1;
+                margin: 0 5px;
+                font-size: 1em;
+                color: #333;
+                outline: none;
+                border: none;
+                transition: background-color 0.3s, color 0.3s;
+
+                &:hover {
+                    background-color: rgb(91, 91, 255);
+                    cursor: pointer;
+                    color: white;
+                }
+            }
+        </style>
+
+        <div id="contentArea">
+            <div id="bannerImage">
+                <!-- Banner Image Here -->
+                <div id="profileImage">
+                    <!-- Profile Image Here -->
+                </div>
+            </div>
+            <div id="titleArea">
+                <h3 id="userTitle">Your Title Here</h3>
+                <span id="tagline">Tagline Here</span>
+            </div>
+
+            <div id="navLinks">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="styleOptins">Style Options</div> -->
+
+    <script src="./script.js">
+
+    </script>
+</body>
+
+</html>
